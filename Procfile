@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.datasource.url=$DB_URL -Dspring.datasource.username=$DB_USER -Dspring.datasource.password=$DB_PASS $JAVA_OPTS -jar build/libs/rn-pingpong-1.0.0-SNAPSHOT.jar

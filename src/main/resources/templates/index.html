@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <title>RN Ping Pong Standings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 main">
+            <div class="col-sm-6 col-md-6">
+                <h2 class="sub-header">Players</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="player : ${players}">
+                            <td th:text="${player.name}"></td>
+                            <td th:text="${player.rating}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <h2 class="sub-header">New Player</h2>
+                <form class="form-horizontal" action="#" th:action="@{/player/new}" th:object="${newPlayer}" method="post">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="name" th:field="*{name}" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 main">
+            <div class="col-sm-6 col-md-6">
+                <h2 class="sub-header">Games</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Player 1</th>
+                        <th>Player 2</th>
+                        <th>Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="game : ${games}">
+                        <td th:each="player : ${players}" th:text="${player.name}" th:if="${game.playerOne == player.id}"></td>
+                        <td th:each="player : ${players}" th:text="${player.name}" th:if="${game.playerTwo == player.id}"></td>
+                        <td>
+                            <span th:text="${game.playerOneScore}"></span>&nbsp;:&nbsp;<span th:text="${game.playerTwoScore}"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <h2 class="sub-header">New Game</h2>
+                <form class="form-horizontal" action="#" th:action="@{/game/new}" th:object="${newGame}" method="post">
+                    <div class="form-group">
+                        <label for="playerOne" class="col-sm-3 control-label">Player 1</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="playerOne" th:field="*{playerOne}" />
+                        </div>
+                        <label for="playerOneScore" class="col-sm-2 control-label">Score</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="playerOneScore" th:field="*{playerOneScore}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="playerTwo" class="col-sm-3 control-label">Player 2</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="playerTwo" th:field="*{playerTwo}" />
+                        </div>
+                        <label for="playerTwoScore" class="col-sm-2 control-label">Score</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="playerTwoScore" th:field="*{playerTwoScore}" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

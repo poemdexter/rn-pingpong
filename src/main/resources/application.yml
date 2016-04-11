@@ -1,0 +1,23 @@
+server:
+  port: 5000
+
+logging:
+  level: WARN
+
+spring:
+  datasource:
+    port: 5432
+    url: x
+    username: x
+    password: x
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  thymeleaf:
+    cache: false
