@@ -26,7 +26,7 @@ class HomeController {
         model.addAttribute('newPlayer', new Player())
         model.addAttribute('newGame', new NewGame())
 
-        return "index"
+        return 'index'
     }
 
     @RequestMapping(value='/player/new', method=RequestMethod.POST)
@@ -34,7 +34,7 @@ class HomeController {
         newPlayer.rating = 100;
         playerRepository.save(newPlayer)
 
-        return index(model)
+        return 'redirect:/'
     }
 
     @RequestMapping(value='/game/new', method=RequestMethod.POST)
@@ -48,6 +48,9 @@ class HomeController {
         game.playerTwo = player2.id
         game.playerOneScore = newGame.playerOneScore
         game.playerTwoScore = newGame.playerTwoScore
+        game.playerOneRatingBefore = player1.rating
+        game.playerTwoRatingBefore = player2.rating
+
 
         int adj = 0;
         if (game.playerOneScore > game.playerTwoScore) {
@@ -66,7 +69,7 @@ class HomeController {
         game.playerTwoAdjustment = -adj
         gameRepository.save(game)
 
-        return index(model)
+        return 'redirect:/'
     }
 
     private int getAdjustment(int winnerRating, int loserRating, int winnerScore, int loserScore) {

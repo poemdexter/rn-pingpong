@@ -11,28 +11,14 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 main">
-            <div class="col-sm-6 col-md-6">
-                <h2 class="sub-header">Players</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Player</th>
-                            <th>Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="player : ${players}">
-                            <td th:text="${player.name}"></td>
-                            <td th:text="${player.rating}"></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row page-header">
+                <h1>RN Ping Pong ELO Standings <small><a href="https://docs.google.com/spreadsheets/d/1rq0Wy7V8cajo3vF4q9B_VRq1lZun9LhT5iSS2MDnJWM/edit?usp=sharing" target="_blank">rating calc info</a></small></h1>
             </div>
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-4 col-md-4">
                 <h2 class="sub-header">New Player</h2>
                 <form class="form-horizontal" action="#" th:action="@{/player/new}" th:object="${newPlayer}" method="post">
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">Name</label>
+                        <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="name" th:field="*{name}" />
                         </div>
@@ -40,34 +26,11 @@
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-12 main">
-            <div class="col-sm-6 col-md-6">
-                <h2 class="sub-header">Games</h2>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Player 1</th>
-                        <th>Player 2</th>
-                        <th>Score</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="game : ${games}">
-                        <td th:each="player : ${players}" th:text="${player.name}" th:if="${game.playerOne == player.id}"></td>
-                        <td th:each="player : ${players}" th:text="${player.name}" th:if="${game.playerTwo == player.id}"></td>
-                        <td>
-                            <span th:text="${game.playerOneScore}"></span>&nbsp;:&nbsp;<span th:text="${game.playerTwoScore}"></span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-8 col-md-8">
                 <h2 class="sub-header">New Game</h2>
                 <form class="form-horizontal" action="#" th:action="@{/game/new}" th:object="${newGame}" method="post">
                     <div class="form-group">
-                        <label for="playerOne" class="col-sm-3 control-label">Player 1</label>
+                        <label for="playerOne" class="col-sm-2 control-label">Player 1</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="playerOne" th:field="*{playerOne}" />
                         </div>
@@ -77,7 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="playerTwo" class="col-sm-3 control-label">Player 2</label>
+                        <label for="playerTwo" class="col-sm-2 control-label">Player 2</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="playerTwo" th:field="*{playerTwo}" />
                         </div>
@@ -88,6 +51,59 @@
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 main">
+            <div class="col-sm-4 col-md-4">
+                <h2 class="sub-header">Players</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="player : ${players}">
+                        <td th:text="${player.name}"></td>
+                        <td th:text="${player.rating}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-8 col-md-8">
+                <h2 class="sub-header">Games</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Player (Rating)</th>
+                        <th>Adjustment</th>
+                        <th>New Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="game : ${games}">
+                        <tr th:each="player : ${players}" th:if="${game.playerOne == player.id}">
+                            <th th:text="${game.playerOneScore} + ' : ' + ${game.playerTwoScore}" th:rowspan="2"></th>
+                            <td th:text="${player.name} + ' (' + ${game.playerOneRatingBefore} + ')'" ></td>
+                            <td>
+                                <span class="label label-success" th:text="'+' + ${game.playerOneAdjustment}" th:if="${game.playerOneAdjustment &gt; 0}"></span>
+                                <span class="label label-warning" th:text="${game.playerOneAdjustment}" th:if="${game.playerOneAdjustment == 0}"></span>
+                                <span class="label label-danger" th:text="${game.playerOneAdjustment}" th:if="${game.playerOneAdjustment &lt; 0}"></span>
+                            </td>
+                            <td th:text="${game.playerOneRatingBefore + game.playerOneAdjustment}"></td>
+                        </tr>
+                        <tr th:each="player : ${players}" th:if="${game.playerTwo == player.id}">
+                            <td th:text="${player.name} + ' (' + ${game.playerTwoRatingBefore} + ')'"></td>
+                            <td th:if="${game.playerTwo == player.id}">
+                                <span class="label label-success" th:text="'+' + ${game.playerTwoAdjustment}" th:if="${game.playerTwoAdjustment &gt; 0}"></span>
+                                <span class="label label-warning" th:text="${game.playerTwoAdjustment}" th:if="${game.playerTwoAdjustment == 0}"></span>
+                                <span class="label label-danger" th:text="${game.playerTwoAdjustment}" th:if="${game.playerTwoAdjustment &lt; 0}"></span>
+                            </td>
+                            <td th:text="${game.playerTwoRatingBefore + game.playerTwoAdjustment}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

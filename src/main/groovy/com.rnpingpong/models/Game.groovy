@@ -26,6 +26,10 @@ class Game {
 
     @NotNull Integer playerTwoScore
 
+    @NotNull Integer playerOneRatingBefore
+
+    @NotNull Integer playerTwoRatingBefore
+
     @NotNull Integer playerOneAdjustment
 
     @NotNull Integer playerTwoAdjustment
