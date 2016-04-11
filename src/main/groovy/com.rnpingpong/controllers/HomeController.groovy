@@ -57,20 +57,23 @@ class HomeController {
             adj = getAdjustment(player1.rating, player2.rating, newGame.playerOneScore, newGame.playerTwoScore)
             player1.rating += adj
             player2.rating = (player2.rating - adj >= 0) ? player2.rating - adj : 0
+            game.playerOneAdjustment = adj
+            game.playerTwoAdjustment = -adj
         } else {
             adj = getAdjustment(player2.rating, player1.rating, newGame.playerTwoScore, newGame.playerOneScore)
             player2.rating += adj
             player1.rating = (player1.rating - adj >= 0) ? player1.rating - adj : 0
+            game.playerOneAdjustment = -adj
+            game.playerTwoAdjustment = adj
         }
 
         playerRepository.save([player1, player2])
-
-        game.playerOneAdjustment = adj
-        game.playerTwoAdjustment = -adj
         gameRepository.save(game)
 
         return 'redirect:/'
     }
+
+
 
     private int getAdjustment(int winnerRating, int loserRating, int winnerScore, int loserScore) {
         int ratingDiff = winnerRating - loserRating;
