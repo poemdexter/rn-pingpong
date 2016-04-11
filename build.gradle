@@ -48,4 +48,4 @@ task copyToLib(type: Copy) {
 
 build.dependsOn(copyToLib)
 
-task stage(dependsOn: ['clean', 'build'])
+task stage(dependsOn: ['clean', 'build', 'copyToLib'])
