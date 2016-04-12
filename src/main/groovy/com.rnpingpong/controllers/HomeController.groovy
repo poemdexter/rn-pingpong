@@ -86,24 +86,16 @@ class HomeController {
         int adj = 0;
 
         if (ratingDiff <= 0) { // upset
-            if (ratingDiff >= -1) { adj = 2 }
-            else if (ratingDiff >= -4) { adj = 3 }
-            else if (ratingDiff >= -7) { adj = 4 }
-            else if (ratingDiff >= -10) { adj = 6 }
-            else if (ratingDiff >= -13) { adj = 8 }
-            else if (ratingDiff >= -16) { adj = 10 }
-            else if (ratingDiff >= -20) { adj = 13 }
-            else if (ratingDiff >= -25) { adj = 16 }
-            else { adj = 20 }
+                 if (ratingDiff >=  -4) { adj = 2 }
+            else if (ratingDiff >=  -8) { adj = 4 }
+            else if (ratingDiff >= -12) { adj = 6 }
+            else if (ratingDiff >= -16) { adj = 8 }
+            else if (ratingDiff >= -20) { adj = 10 }
+            else if (ratingDiff >= -24) { adj = 12 }
+            else { adj = 15 }
         } else { // expected
-            if (ratingDiff <= 1) { adj = 2 }
-            else if (ratingDiff <= 4) { adj = 2 }
-            else if (ratingDiff <= 7) { adj = 2 }
-            else if (ratingDiff <= 10) { adj = 2 }
-            else if (ratingDiff <= 13) { adj = 1 }
-            else if (ratingDiff <= 16) { adj = 1 }
-            else if (ratingDiff <= 20) { adj = 1 }
-            else if (ratingDiff <= 25) { adj = 0 }
+                 if (ratingDiff <= 12) { adj = 2 }
+            else if (ratingDiff <= 24) { adj = 1 }
             else { adj = 0 }
         }
 
