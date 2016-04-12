@@ -108,8 +108,8 @@ class HomeController {
         }
 
         // k factor
-        if (scoreDiff >= 14) { adj = adj * 3 }
-        else if (scoreDiff >= 7) { adj = adj * 2 }
+        if (scoreDiff >= 14) { adj += 2 }
+        else if (scoreDiff >= 7) { adj += 1 }
 
         return adj;
     }
