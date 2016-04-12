@@ -17,4 +17,6 @@ class Player {
 
     @NotNull String name;
     @NotNull Integer rating;
+    Integer wins;
+    Integer losses;
 }

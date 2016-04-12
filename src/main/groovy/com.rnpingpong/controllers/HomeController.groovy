@@ -35,6 +35,8 @@ class HomeController {
     @RequestMapping(value='/player/new', method=RequestMethod.POST)
     public String playerSubmit(@ModelAttribute Player newPlayer, ModelMap model) {
         newPlayer.rating = 100;
+        newPlayer.wins = 0;
+        newPlayer.losses = 0;
         if (playerRepository.findByName(newPlayer.name) == null) {
             playerRepository.save(newPlayer)
             model.addAttribute('result', 'success')
@@ -62,12 +64,16 @@ class HomeController {
             adj = getAdjustment(player1.rating, player2.rating, newGame.playerOneScore, newGame.playerTwoScore)
             player1.rating += adj
             player2.rating = (player2.rating - adj >= 0) ? player2.rating - adj : 0
+            player1.wins += 1
+            player2.losses += 1
             game.playerOneAdjustment = adj
             game.playerTwoAdjustment = -adj
         } else {
             adj = getAdjustment(player2.rating, player1.rating, newGame.playerTwoScore, newGame.playerOneScore)
             player1.rating = (player1.rating - adj >= 0) ? player1.rating - adj : 0
             player2.rating += adj
+            player1.losses += 1
+            player2.wins += 1
             game.playerOneAdjustment = -adj
             game.playerTwoAdjustment = adj
         }
