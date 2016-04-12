@@ -20,20 +20,25 @@ class HomeController {
 
     @RequestMapping(value = '/', method = RequestMethod.GET)
     String index(final ModelMap model) {
-
-        model.addAttribute('players', playerRepository.findAllByOrderByRatingDesc())
-        model.addAttribute('games', gameRepository.findAllByOrderByCreatedDesc())
         model.addAttribute('newPlayer', new Player())
         model.addAttribute('newGame', new NewGame())
-
         return 'index'
+    }
+
+    @RequestMapping(value = '/dashboard', method = RequestMethod.GET)
+    String dashboard(final ModelMap model) {
+        model.addAttribute('players', playerRepository.findAllByOrderByRatingDesc())
+        model.addAttribute('games', gameRepository.findAllByOrderByCreatedDesc())
+        return 'dashboard'
     }
 
     @RequestMapping(value='/player/new', method=RequestMethod.POST)
     public String playerSubmit(@ModelAttribute Player newPlayer, ModelMap model) {
         newPlayer.rating = 100;
-        playerRepository.save(newPlayer)
-
+        if (playerRepository.findByName(newPlayer.name) == null) {
+            playerRepository.save(newPlayer)
+            model.addAttribute('result', 'success')
+        }
         return 'redirect:/'
     }
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <title>RN Ping Pong Standings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="/css/dashboard.css" rel="stylesheet" media="screen" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">RN Ping Pong ELO Standings</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">New Game/Player</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1rq0Wy7V8cajo3vF4q9B_VRq1lZun9LhT5iSS2MDnJWM/edit?usp=sharing" target="_blank">Rating Info</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <h2 class="sub-header">Standings</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Player</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="player, itr : ${players}">
+                        <td th:text="${itr.count}"></td>
+                        <td th:text="${player.name}"></td>
+                        <td th:text="${player.rating}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h2 class="sub-header">Games</h2>
+            <div class="row placeholders">
+                <div th:each="game : ${games}" class="col-xs-6 col-sm-3 col-md-2 well placeholder">
+                    <div class="game-info">
+                        <div>
+                            <div th:each="player : ${players}" th:if="${game.playerOne == player.id}" class="player-info">
+                                <div th:text="${player.name}" class="player-name"></div>
+                                <div th:text="${game.playerOneRatingBefore}" class="player-rating"></div>
+                            </div>
+                            <span th:text="${game.playerOneScore}" class="player-score"></span>
+                        </div>
+                        <div>
+                            <div th:each="player : ${players}" th:if="${game.playerTwo == player.id}" class="player-info">
+                                <div th:text="${player.name}" class="player-name"></div>
+                                <div th:text="${game.playerTwoRatingBefore}" class="player-rating"></div>
+                            </div>
+                            <span th:text="${game.playerTwoScore}" class="player-score"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

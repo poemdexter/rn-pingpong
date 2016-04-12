@@ -10,6 +10,10 @@ spring:
     url: x
     username: x
     password: x
+    max-idle: 3
+    min-idle: 0
+    max-active: 3
+    initial-size: 0
 
   jpa:
     show-sql: false
