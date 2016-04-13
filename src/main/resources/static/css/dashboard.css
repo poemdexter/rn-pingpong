@@ -110,7 +110,7 @@ body {
     font-weight: bold;
 }
 .player-rating {
-    color: #999;
+    color: #9BA0A3;
     margin-top: -8px;
 }
 .player-score {
@@ -119,4 +119,36 @@ body {
     text-align: right;
     font-weight: bold;
     float: right;
+}
+
+/*
+ *  making things RN-ish
+ */
+body {
+    font-family: Verdana, sans-serif;
+    color: #58585B;
+    background-color: #fff;
+}
+.navbar-inverse {
+    background-color: #0077BF;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #0077BF;
+}
+.well {
+    border: 2px solid #fff;
+    background-color: #D8E0E5;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #D8E0E5;
+}
+.sub-header {
+    font-weight: bold;
+    color: #103A5D;
 }
