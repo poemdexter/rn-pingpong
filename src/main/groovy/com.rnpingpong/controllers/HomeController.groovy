@@ -6,6 +6,7 @@ import com.rnpingpong.models.Player
 import com.rnpingpong.repositories.GameRepository
 import com.rnpingpong.repositories.PlayerRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.ModelAttribute
@@ -17,6 +18,9 @@ class HomeController {
 
     @Autowired GameRepository gameRepository
     @Autowired PlayerRepository playerRepository
+
+    @Value('${hipchatToken}')
+    String authToken
 
     @RequestMapping(value = '/', method = RequestMethod.GET)
     String index(final ModelMap model) {
@@ -81,10 +85,16 @@ class HomeController {
         playerRepository.save([player1, player2])
         gameRepository.save(game)
 
+        notifyHipchat(game, player1.name, player2.name)
+
         return 'redirect:/'
     }
 
-
+    private void notifyHipchat(game, p1Name, p2Name) {
+        def message = "$p1Name ($game.playerOneRatingBefore) vs. $p2Name ($game.playerTwoRatingBefore) : $game.playerOneScore - $game.playerTwoScore"
+        def hipchatMessage = message.replace(' ', '+')
+        new URL("https://api.hipchat.com/v1/rooms/message?room_id=2636455&from=PingPongBot&message=$hipchatMessage&notify=1&auth_token=$authToken").getText()
+    }
 
     private int getAdjustment(int winnerRating, int loserRating, int winnerScore, int loserScore) {
         int ratingDiff = winnerRating - loserRating;

@@ -4,6 +4,8 @@ server:
 logging:
   level: WARN
 
+hipchatToken: x
+
 spring:
   datasource:
     port: 5432
