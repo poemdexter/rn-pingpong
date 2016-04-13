@@ -143,10 +143,10 @@ body {
 }
 .well {
     border: 2px solid #fff;
-    background-color: #F2F4F7;
+    background-color: #DCE3EB;
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #F2F4F7;
+    background-color: #DCE3EB;
 }
 .sub-header {
     font-weight: bold;
