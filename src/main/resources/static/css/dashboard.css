@@ -125,12 +125,12 @@ body {
  *  making things RN-ish
  */
 body {
-    font-family: Verdana, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     color: #58585B;
     background-color: #fff;
 }
 .navbar-inverse {
-    background-color: #0077BF;
+    background-color: #1276BE;
 }
 .navbar-inverse .navbar-brand {
     color: #fff;
@@ -139,16 +139,16 @@ body {
     color: #fff;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #0077BF;
+    border-color: #1276BE;
 }
 .well {
     border: 2px solid #fff;
-    background-color: #D8E0E5;
+    background-color: #F2F4F7;
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #D8E0E5;
+    background-color: #F2F4F7;
 }
 .sub-header {
     font-weight: bold;
-    color: #103A5D;
+    color: #1A4283;
 }
