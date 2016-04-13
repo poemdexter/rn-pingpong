@@ -94,9 +94,7 @@ body {
 .placeholders h4 {
     margin-bottom: 0;
 }
-.placeholder {
-    margin-bottom: 20px;
-}
+
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
@@ -107,11 +105,11 @@ body {
 }
 .player-name {
     font-size: 18px;
-    font-weight: bold;
 }
 .player-rating {
     color: #9BA0A3;
-    margin-top: -8px;
+    margin-top: -3px;
+    font-size: 10px;
 }
 .player-score {
     font-size: 18px;
@@ -120,6 +118,11 @@ body {
     font-weight: bold;
     float: right;
 }
+.winner {
+    font-weight: bold;
+    color: #1A4283;
+}
+.loser {}
 
 /*
  *  making things RN-ish
@@ -128,6 +131,7 @@ body {
     font-family: Verdana, Geneva, sans-serif;
     color: #58585B;
     background-color: #fff;
+    line-height: 1.4em;
 }
 .navbar-inverse {
     background-color: #1276BE;
@@ -142,8 +146,10 @@ body {
     border-color: #1276BE;
 }
 .well {
-    border: 2px solid #fff;
+    border: 3px solid #fff;
     background-color: #DCE3EB;
+    margin-bottom: 0px;
+    padding: 10px;
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #DCE3EB;
@@ -151,4 +157,13 @@ body {
 .sub-header {
     font-weight: bold;
     color: #1A4283;
+}
+.sidebar {
+    top: 20px;
+}
+.main {
+    top: -30px;
+}
+.bottom-player {
+    margin-top: 4px;
 }

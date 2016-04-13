@@ -61,15 +61,15 @@
                     <div class="game-info">
                         <div>
                             <div th:each="player : ${players}" th:if="${game.playerOne == player.id}" class="player-info">
-                                <div th:text="${player.name}" class="player-name"></div>
-                                <div th:text="${game.playerOneRatingBefore}" class="player-rating"></div>
+                                <div th:text="${player.name}" class="player-name" th:classappend="${game.playerOneScore &gt; game.playerTwoScore} ? winner : loser"></div>
+                                <div th:text="${game.playerOneRatingBefore} + '(' + ${game.playerOneAdjustment} +')'" class="player-rating"></div>
                             </div>
                             <span th:text="${game.playerOneScore}" class="player-score"></span>
                         </div>
-                        <div>
+                        <div class="bottom-player">
                             <div th:each="player : ${players}" th:if="${game.playerTwo == player.id}" class="player-info">
-                                <div th:text="${player.name}" class="player-name"></div>
-                                <div th:text="${game.playerTwoRatingBefore}" class="player-rating"></div>
+                                <div th:text="${player.name}" class="player-name" th:classappend="${game.playerOneScore &lt; game.playerTwoScore} ? winner : loser"></div>
+                                <div th:text="${game.playerTwoRatingBefore} + '(' + ${game.playerTwoAdjustment} +')'" class="player-rating"></div>
                             </div>
                             <span th:text="${game.playerTwoScore}" class="player-score"></span>
                         </div>
