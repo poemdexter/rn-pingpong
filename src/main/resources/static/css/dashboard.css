@@ -104,7 +104,7 @@ body {
     vertical-align: middle;
 }
 .player-name {
-    font-size: 18px;
+    font-size: 16px;
 }
 .player-rating {
     color: #9BA0A3;
@@ -112,11 +112,11 @@ body {
     font-size: 10px;
 }
 .player-score {
-    font-size: 18px;
     vertical-align: top;
     text-align: right;
     font-weight: bold;
     float: right;
+    font-size: 16px;
 }
 .winner {
     font-weight: bold;
@@ -149,7 +149,7 @@ body {
     border: 3px solid #fff;
     background-color: #DCE3EB;
     margin-bottom: 0px;
-    padding: 10px;
+    padding: 3px 8px 0px 8px;
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #DCE3EB;
@@ -157,6 +157,7 @@ body {
 .sub-header {
     font-weight: bold;
     color: #1A4283;
+    padding-bottom: 4px;
 }
 .sidebar {
     top: 20px;
