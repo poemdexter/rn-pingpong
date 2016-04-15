@@ -91,7 +91,7 @@ class HomeController {
     }
 
     private void notifyHipchat(game, p1Name, p2Name) {
-        def message = "$p1Name ($game.playerOneRatingBefore) vs. $p2Name ($game.playerTwoRatingBefore) : $game.playerOneScore - $game.playerTwoScore"
+        def message = "$p1Name $game.playerOneRatingBefore($game.playerOneAdjustment) vs. $p2Name $game.playerTwoRatingBefore($game.playerTwoAdjustment) : $game.playerOneScore - $game.playerTwoScore"
         def hipchatMessage = message.replace(' ', '+')
         new URL("https://api.hipchat.com/v1/rooms/message?room_id=2636455&from=PingPongBot&message=$hipchatMessage&notify=1&auth_token=$authToken").getText()
     }
