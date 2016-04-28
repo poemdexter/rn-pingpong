@@ -19,4 +19,15 @@ class Player {
     @NotNull Integer rating;
     Integer wins;
     Integer losses;
+
+    def getWinPercentage() {
+        int w = wins.intValue()
+        int l = losses.intValue()
+
+        if (w + l > 0) {
+            return ((w / (w + l)) * 100).intValue()
+        } else {
+            return 0
+        }
+    }
 }

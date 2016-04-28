@@ -40,7 +40,7 @@
                         <th>#</th>
                         <th>Player</th>
                         <th>Rating</th>
-                        <th>W/L</th>
+                        <th>Win %</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,7 +48,7 @@
                         <td th:text="${itr.count}"></td>
                         <td th:text="${player.name}"></td>
                         <td th:text="${player.rating}"></td>
-                        <td th:text="${player.wins + '-' + player.losses}"></td>
+                        <td th:text="${player.winPercentage}"></td>
                     </tr>
                     </tbody>
                 </table>
