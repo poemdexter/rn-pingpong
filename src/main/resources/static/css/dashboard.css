@@ -168,3 +168,6 @@ body {
 .bottom-player {
     margin-top: 4px;
 }
+.table>tbody>tr>td, .table>thead>tr>th {
+    padding: 4px;
+}
