@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface GameRepository extends CrudRepository<Game, Integer> {
 
-    List<Game> findAllByOrderByCreatedDesc()
+    List<Game> findTop36ByOrderByCreatedDesc()
 }

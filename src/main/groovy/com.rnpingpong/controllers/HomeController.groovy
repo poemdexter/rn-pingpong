@@ -32,7 +32,7 @@ class HomeController {
     @RequestMapping(value = '/dashboard', method = RequestMethod.GET)
     String dashboard(final ModelMap model) {
         model.addAttribute('players', playerRepository.findAllByOrderByRatingDesc())
-        model.addAttribute('games', gameRepository.findAllByOrderByCreatedDesc())
+        model.addAttribute('games', gameRepository.findTop36ByOrderByCreatedDesc())
         return 'dashboard'
     }
 
