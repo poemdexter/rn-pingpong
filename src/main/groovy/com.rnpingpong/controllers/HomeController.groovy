@@ -24,6 +24,7 @@ class HomeController {
 
     @RequestMapping(value = '/', method = RequestMethod.GET)
     String index(final ModelMap model) {
+        model.addAttribute('players', playerRepository.findAllByOrderByName())
         model.addAttribute('newPlayer', new Player())
         model.addAttribute('newGame', new NewGame())
         return 'index'
@@ -51,13 +52,15 @@ class HomeController {
     @RequestMapping(value='/game/new', method=RequestMethod.POST)
     public String gameSubmit(@ModelAttribute NewGame newGame, ModelMap model) {
 
+        // player 1 is always winner
+        // player 2 is always loser
         Player player1 = playerRepository.findByName(newGame.playerOne)
         Player player2 = playerRepository.findByName(newGame.playerTwo)
 
         Game game = new Game()
         game.playerOne = player1.id
         game.playerTwo = player2.id
-        game.playerOneScore = newGame.playerOneScore
+        game.playerOneScore = 21
         game.playerTwoScore = newGame.playerTwoScore
         game.playerOneRatingBefore = player1.rating
         game.playerTwoRatingBefore = player2.rating

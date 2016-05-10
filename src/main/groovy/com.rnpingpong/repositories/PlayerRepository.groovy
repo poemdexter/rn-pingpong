@@ -9,4 +9,6 @@ interface PlayerRepository extends CrudRepository<Player, Integer> {
     Player findByName(String name)
 
     List<Player> findAllByOrderByRatingDesc()
+
+    List<Player> findAllByOrderByName()
 }
